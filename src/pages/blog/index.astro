@@ -1,0 +1,112 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+let rawPosts = [];
+try {
+  rawPosts = await Astro.glob("../../components/blog/*.{md,mdx}");
+} catch (e) {
+  rawPosts = [];
+}
+
+const posts = rawPosts
+  .map((r) => {
+    const fileName = r.file.split("/").pop()?.replace(/\.(md|mdx)$/, "");
+    const data = r.frontmatter || r.data || {};
+    const slug = data.slug || fileName;
+    const href = r.url || `/blog/${slug}`;
+
+    return {
+      ...r,
+      data,
+      href,
+    };
+  })
+  .sort((a, b) => {
+    const dateA = new Date(a.data.date || 0).getTime();
+    const dateB = new Date(b.data.date || 0).getTime();
+    return dateB - dateA;
+  });
+---
+
+<Layout title="Blog" description="p">
+  <header class="py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
+      <h1 class="text-4xl font-medium tracking-tight text-primary-950 dark:text-white sm:text-5xl lg:text-6xl">
+        Blog
+      </h1>
+      <p class="text-primary-950/70 dark:text-primary-200/70 mx-auto mt-4 max-w-xl text-lg sm:text-xl">
+        things
+      </p>
+    </div>
+  </header>
+
+  <section class="py-12 sm:py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <div class="space-y-6">
+        {
+          posts.map((item) => {
+            const descriptionText =
+              item.data.dec ||
+              item.data.description ||
+              item.data.summary ||
+              item.data.quote;
+
+            return (
+              <a
+                href={item.href}
+                class="group border-primary-900/10 dark:border-primary-300/10 bg-primary-50/50 dark:bg-primary-900/20 hover:border-primary-900/20 dark:hover:border-primary-300/30 flex items-start gap-4 rounded-xl border p-4 transition-all duration-200 focus:outline-none"
+              >
+                <!--Icon -->
+                <div class="bg-primary-500/10 dark:bg-primary-400/10 border-primary-900/10 dark:border-primary-300/10 relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border shadow-sm sm:h-24 sm:w-24">
+                  {item.data.cover || item.data.image ? (
+                    <img
+                      src={item.data.cover || item.data.image}
+                      alt={item.data.title || "Post thumbnail"}
+                      class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div class="flex h-full items-center justify-center text-xs opacity-40">
+                      No Cover
+                    </div>
+                  )}
+                </div>
+
+                <!-- Post Content Details -->
+                <div class="flex flex-1 flex-col justify-center overflow-hidden">
+                  <div class="text-primary-950/60 dark:text-primary-200/60 flex items-center gap-2 text-xs font-medium">
+                    {item.data.date && (
+                      <time datetime={item.data.date}>
+                        {new Date(item.data.date).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </time>
+                    )}
+                    {item.data.type && (
+                      <>
+                        <span>•</span>
+                        <span class="capitalize">{item.data.type}</span>
+                      </>
+                    )}
+                  </div>
+
+                  <h2 class="mt-1 text-lg font-medium tracking-tight text-primary-950 dark:text-white group-hover:underline sm:text-xl">
+                    {item.data.title || "Untitled Post"}
+                  </h2>
+
+                  <!-- Description -->
+                  {descriptionText && (
+                    <p class="text-primary-950/70 dark:text-primary-200/70 mt-1.5 line-clamp-2 text-sm leading-relaxed">
+                      {descriptionText}
+                    </p>
+                  )}
+                </div>
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
