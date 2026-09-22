@@ -4,7 +4,8 @@ import '@fontsource/inter/latin-500.css';
 import { ViewTransitions } from 'astro:transitions';
 import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
-import StagingBanner from '~/components/StagingBanner.astro';
+import StagingBanner from '~/components/banner/StagingBanner.astro';
+import PixelTrail from '~/components/easteregg/PixelTrail.astro';
 
 interface Props {
   description: string;
@@ -36,6 +37,7 @@ const { description, title } = Astro.props;
     class="bg-primary-50 text-primary-950 dark:bg-primary-950 dark:text-primary-200 antialiased transition"
   >
     <StagingBanner />
+    <PixelTrail />
     <Header />
     <main>
       <slot />

@@ -41,22 +41,39 @@ const links = [
   
     class="mx-auto flex max-w-2xl items-center justify-between px-4 py-4 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8"
   >
-    <!-- Brand logo -->
-    <div class="flex">
-      <a
-        href="/"
-        class="focus-visible:outline-primary-950 dark:group-focus-visible:outline-primary-200 rounded-md focus-visible:outline focus-visible:outline-2"
-      >
-        <span class="sr-only">fryrvo</span>
-        <img
-          class="h-8 w-auto"
-          width="65"
-          height="40"
-          :src="$store.theme.isDark ? 'https://cdn.fryrvo.com/assets/fryrvo_branding/Logo_bg.png' : 'https://cdn.fryrvo.com/assets/fryrvo_branding/Logo_bg.png'"
-          alt="fryrvo"
-        />
-      </a>
-    </div>
+
+
+
+<!-- Branding -->
+<div class="flex max-w-sm flex-col items-start gap-3 sm:gap-4">
+  <img
+    id="site-logo-head"
+    class="h-10 w-auto cursor-pointer transition-transform duration-100 active:scale-90"
+    width="100"
+    height="70"
+    src="https://cdn.fryrvo.com/assets/fryrvo_branding/Logo_bg.png"
+    alt="Fryrvo"
+  />
+
+  <script>
+    let c = 0, t: any;
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target) return;
+
+      if (target.id === 'site-logo-head') {
+        clearTimeout(t);
+        if (++c >= 1) return window.location.href = "/";
+        t = setTimeout(() => c = 0, 1500);
+      } else {
+
+      }
+    });
+  </script>
+</div>
+
+
 
     <!-- Actions -->
     <div class="-mr-2 flex items-center space-x-2 sm:space-x-3">
@@ -159,6 +176,7 @@ const links = [
           class="w-full h-auto object-contain cursor-pointer"
         />
       </a>
+      
       </div>
 
 
