@@ -1,0 +1,6 @@
+- name: Build Astro site
+  run: npm run build
+  env:
+    PUBLIC_IS_STAGING: ${{ vars.PUBLIC_IS_STAGING }}
+    PUBLIC_COMMIT_SHA: ${{ github.sha }}
+    PUBLIC_REPO_NAME: ${{ github.repository }}

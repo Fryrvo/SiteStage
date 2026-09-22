@@ -1,0 +1,21 @@
+---
+import Heading from '~/mc/components/about/Heading.astro';
+import Mission from '~/mc/components/about/Mission.astro';
+import Team from '~/mc/components/about/Team.astro';
+import ContactForm from '~/mc/components/contact/ContactForm.astro';
+import ContactInfo from '~/mc/components/contact/ContactInfo.astro';
+import Layout from '~/mc/layouts/Layout.astro';
+import Schema from '~/mc/layouts/Schema.astro';
+---
+
+<Layout
+  description="about Fryrvo"
+  title="About · Fryrvo"
+>
+  <Schema />
+  <Heading />
+  <Mission />
+  <Team />
+  <!-- <ContactInfo /> -->
+  <ContactForm />
+</Layout>
