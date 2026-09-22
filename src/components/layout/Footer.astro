@@ -36,7 +36,7 @@ const bottomLinks = [
     ],
   },
   {
-        header: 'Projects',
+    header: 'Projects',
     links: [
       {
         name: 'Minecraft',
@@ -56,7 +56,7 @@ const bottomLinks = [
     ],
   },
   {
-   header: 'Legal',
+    header: 'Legal',
     links: [
       {
         name: 'Privacy',
@@ -76,6 +76,14 @@ const bottomLinks = [
     ],
   },
 ];
+
+
+// for build id
+const fullSha = import.meta.env.CF_PAGES_COMMIT_SHA || import.meta.env.PUBLIC_COMMIT_SHA || 'localtest';
+const repoName = import.meta.env.PUBLIC_REPO_NAME || 'fryrvo/sitestage';
+const shortSha = fullSha.slice(0, 7);
+const commitUrl = `https://github.com/${repoName}/commit/${fullSha}`;
+
 ---
 
 <footer
@@ -86,33 +94,29 @@ const bottomLinks = [
   <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
     <div class="flex flex-col justify-between gap-12 sm:gap-16 lg:flex-row">
       
-<!-- Branding -->
-<div class="flex max-w-sm flex-col items-start gap-3 sm:gap-4">
-  <img
-    id="site-logo-foot"
-    class="h-10 w-auto cursor-pointer transition-transform duration-100 active:scale-90"
-    width="100"
-    height="70"
-    src="https://cdn.fryrvo.com/assets/fryrvo_branding/Logo_bg.png"
-    alt="Fryrvo"
-  />
+      <!-- Branding -->
+      <div class="flex max-w-sm flex-col items-start gap-3 sm:gap-4">
+        <img
+          id="site-logo-foot"
+          class="h-10 w-auto cursor-pointer transition-transform duration-100 active:scale-90"
+          width="100"
+          height="70"
+          src="https://cdn.fryrvo.com/assets/fryrvo_branding/Logo_bg.png"
+          alt="Fryrvo"
+        />
 
-  <script>
-    let c = 0, t: any;
+        <script>
+          let c = 0, t: any;
 
-    document.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      if (target && target.id === 'site-logo-foot') {
-        clearTimeout(t);
-        if (++c >= 7) return window.location.href = "/stage";
-        t = setTimeout(() => c = 0, 1500);
-      }
-    });
-  </script>
-
-
-        
-
+          document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (target && target.id === 'site-logo-foot') {
+              clearTimeout(t);
+              if (++c >= 7) return window.location.href = "/stage";
+              t = setTimeout(() => c = 0, 1500);
+            }
+          });
+        </script>
 
         <!-- Social Media Icons -->
         <div class="flex items-center gap-3">
@@ -155,8 +159,18 @@ const bottomLinks = [
         </div>
 
         <p class="text-primary-950/70 dark:text-primary-200/70 text-base">
-          Cath Made this website
+          Cath Made this website @{' '}
+          <a
+          
+            href={commitUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono underline hover:text-primary-950 dark:hover:text-primary-200"
+          >
+            {shortSha}
+          </a>
         </p>
+
         <p class="text-primary-950/70 dark:text-primary-200/70 text-sm">
           © 2026 <a href="https://fryrvo.com" class="no-underline hover:underline">Fryrvo</a>
         </p>
