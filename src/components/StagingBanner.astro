@@ -8,7 +8,7 @@ import.meta.env.PUBLIC_IS_STAGING === 'true' ||
 import.meta.env.PUBLIC_IS_STAGING === true;
 
 // for my local test tings 
-const fullSha = import.meta.env.PUBLIC_COMMIT_SHA || 'localtest';
+const fullSha = import.meta.env.CF_PAGES_COMMIT_SHA || import.meta.env.PUBLIC_COMMIT_SHA || 'localtest';
 const repoName = import.meta.env.PUBLIC_REPO_NAME || 'fryrvo/sitestage';
 // here also
 
