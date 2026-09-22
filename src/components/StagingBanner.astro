@@ -1,11 +1,15 @@
 ---
-const isStaging = 
-  // local test
-import.meta.env.PUBLIC_IS_STAGING === 'true' || 
+const isExplicitStaging = 
+// local
+  import.meta.env.PUBLIC_IS_STAGING === 'true' || 
 //
 
-
 import.meta.env.PUBLIC_IS_STAGING === true;
+
+const cfBranch = import.meta.env.CF_PAGES_BRANCH || process.env.CF_PAGES_BRANCH;
+const isNonMainBranch = cfBranch && cfBranch !== 'main';
+
+const isStaging = isExplicitStaging || isNonMainBranch;
 
 // for my local test tings 
 const fullSha = import.meta.env.CF_PAGES_COMMIT_SHA || import.meta.env.PUBLIC_COMMIT_SHA || 'localtest';
