@@ -11,10 +11,10 @@ const isNonMainBranch = cfBranch && cfBranch !== 'main';
 
 const isStaging = isExplicitStaging || isNonMainBranch;
 
-// for my local test tings ( if it falled )
-const fullSha = import.meta.env.CF_PAGES_COMMIT_SHA || import.meta.env.PUBLIC_COMMIT_SHA || 'localtest';
-const repoName = import.meta.env.PUBLIC_REPO_NAME || 'fryrvo/sitestage';
-// here also
+// commit id
+const fullSha = import.meta.env.CF_PAGES_COMMIT_SHA
+const repoName = import.meta.env.PUBLIC_STAGE_REPO_NAME
+// stage repo name 
 
 const shortSha = fullSha.slice(0, 7); 
 
