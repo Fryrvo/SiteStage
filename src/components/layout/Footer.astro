@@ -79,8 +79,8 @@ const bottomLinks = [
 
 
 // for build id
-const fullSha = import.meta.env.CF_PAGES_COMMIT_SHA || import.meta.env.PUBLIC_COMMIT_SHA || 'localtest';
-const repoName = import.meta.env.PUBLIC_REPO_NAME || 'fryrvo/sitestage';
+const fullSha = import.meta.env.CF_PAGES_COMMIT_SHA
+const repoName = import.meta.env.PUBLIC_REPO_NAME
 const shortSha = fullSha.slice(0, 7);
 const commitUrl = `https://github.com/${repoName}/commit/${fullSha}`;
 

@@ -13,4 +13,23 @@ https://fryrvo.com/sitemap-0.xml
 
 status
 https://status.fryrvo.com
+```
+```
+.env File config
 
+// deploying
+PUBLIC_IS_STAGING=false
+
+PUBLIC_REPO_NAME=fryrvostudio/site
+PUBLIC_STAGE_REPO_NAME=fryrvo/sitestage
+
+// don't need to set this if deploy on cloudflare 
+CF_PAGES_BRANCH=
+CF_PAGES_COMMIT_SHA=  
+
+image api
+IMAGE_SECRET_KEY=
+GITHUB_TOKEN=
+
+forms
+DISCORD_WEBHOOK_URL= 
