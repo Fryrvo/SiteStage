@@ -22,7 +22,11 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# vscode folder
+# vscode folder / idea 
 .vscode
+.idea
 
 
+
+
+temp/
