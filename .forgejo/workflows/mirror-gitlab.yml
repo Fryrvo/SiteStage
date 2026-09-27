@@ -1,0 +1,29 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches: ['*']
+    tags: ['*']
+
+jobs:
+  to_gitlab:
+    runs-on: docker
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup SSH Key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Push to GitLab
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+          
+          git remote add gitlab git@gitlab.com:Fryrvo/hd.git
+          git push gitlab --all --force
+          git push gitlab --tags --force
